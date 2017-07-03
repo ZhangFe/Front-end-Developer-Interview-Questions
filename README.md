@@ -49,6 +49,7 @@ This file contains a number of front-end interview questions that can be used wh
 #### HTML Questions:
 
 * What does a `doctype` do?
+
 * What's the difference between full standards mode, almost standards mode and quirks mode?
 * What's the difference between HTML and XHTML?
 * Are there any problems with serving pages as `application/xhtml+xml`?
@@ -65,6 +66,7 @@ This file contains a number of front-end interview questions that can be used wh
 #### CSS Questions:
 
 * What is the difference between classes and IDs in CSS?
+
 * What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 * Describe Floats and how they work.
 * Describe z-index and how stacking context is formed.
@@ -100,7 +102,9 @@ This file contains a number of front-end interview questions that can be used wh
 
 #### JS Questions:
 
-* Explain event delegation
+* 事件代理是什么
+	
+	事件绑定在父元素上，避免重复绑定
 * Explain how `this` works in JavaScript
 * Explain how prototypal inheritance works
 * What do you think of AMD vs CommonJS?
@@ -114,7 +118,11 @@ This file contains a number of front-end interview questions that can be used wh
 * What's the difference between host objects and native objects?
 * Difference between: `function Person(){}`, `var person = Person()`, and `var person = new Person()`?
 * What's the difference between `.call` and `.apply`?
+	
+	参数不同，call是一个个传入，apply传入的是个数组
 * Explain `Function.prototype.bind`.
+	
+	修改this的指向
 * When would you use `document.write()`?
 * What's the difference between feature detection, feature inference, and using the UA string?
 * Explain Ajax in as much detail as possible.
@@ -124,16 +132,29 @@ This file contains a number of front-end interview questions that can be used wh
   * If so, what libraries have you used?
 * Explain "hoisting".
 * Describe event bubbling.
+	
+	事件冒泡，捕获
 * What's the difference between an "attribute" and a "property"?
 * Why is extending built-in JavaScript objects not a good idea?
 * Difference between document load event and document DOMContentLoaded event?
 * What is the difference between `==` and `===`?
+	
+	== 会做类型转换
 * Explain the same-origin policy with regards to JavaScript.
 * Make this work:
+
 ```javascript
 duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
+
+function dub(arr){
+    return arr.concat(arr)
+}
+
 ```
-* Why is it called a Ternary expression, what does the word "Ternary" indicate?
+
+* 什么是三元表达式 (Ternary expression)？“三元 (Ternary)” 表示什么意思？
+	
+	`bool ? 1 : 2`
 * What is `"use strict";`? what are the advantages and disadvantages to using it?
 * Create a for loop that iterates up to `100` while outputting **"fizz"** at multiples of `3`, **"buzz"** at multiples of `5` and **"fizzbuzz"** at multiples of `3` and `5`
 * Why is it, in general, a good idea to leave the global scope of a website as-is and never touch it?
@@ -184,23 +205,36 @@ duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
 
 *Question: What is the value of `foo`?*
 ```javascript
-var foo = 10 + '20';
+var foo = 10 + '20'; //1020
 ```
 
 *Question: How would you make this work?*
 ```javascript
 add(2, 5); // 7
 add(2)(5); // 7
+
+var add = function () {
+    var first = arguments[0];
+    if (arguments.length === 2) {
+        return first + arguments[1];
+    }
+    if(arguments.length === 1){
+        return function (second) {
+            return first + second;
+        };
+    }
+    throw new Error('参数不合法')
+};
 ```
 
 *Question: What value is returned from the following statement?*
 ```javascript
-"i'm a lasagna hog".split("").reverse().join("");
+"i'm a lasagna hog".split("").reverse().join(""); //goh angasal a m'i
 ```
 
 *Question: What is the value of `window.foo`?*
 ```javascript
-( window.foo || ( window.foo = "bar" ) );
+( window.foo || ( window.foo = "bar" ) ); //bar
 ```
 
 *Question: What is the outcome of the two alerts below?*
@@ -211,6 +245,8 @@ var foo = "Hello";
   alert(foo + bar);
 })();
 alert(foo + bar);
+// "Hello World"
+// "bar is not defined"
 ```
 
 *Question: What is the value of `foo.length`?*
@@ -218,6 +254,7 @@ alert(foo + bar);
 var foo = [];
 foo.push(1);
 foo.push(2);
+// 2
 ```
 
 *Question: What is the value of `foo.x`?*
@@ -234,6 +271,9 @@ setTimeout(function() {
   console.log('two');
 }, 0);
 console.log('three');
+// one
+// three
+// two
 ```
 
 #### Fun Questions:
@@ -251,3 +291,5 @@ console.log('three');
 This document started in 2009 as a collaboration of [@paul_irish](https://twitter.com/paul_irish) [@bentruyman](https://twitter.com/bentruyman) [@cowboy](https://twitter.com/cowboy) [@ajpiano](https://twitter.com/ajpiano)  [@SlexAxton](https://twitter.com/slexaxton) [@boazsender](https://twitter.com/boazsender) [@miketaylr](https://twitter.com/miketaylr) [@vladikoff](https://twitter.com/vladikoff) [@gf3](https://twitter.com/gf3) [@jon_neal](https://twitter.com/jon_neal) [@sambreed](https://twitter.com/sambreed) and [@iansym](https://twitter.com/iansym).
 
 It has since received contributions from over [100 developers](https://github.com/h5bp/Front-end-Developer-Interview-Questions/graphs/contributors).
+
+
